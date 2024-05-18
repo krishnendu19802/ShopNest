@@ -5,6 +5,7 @@ const products=require('./routes/products')
 const createorupdateuser=require('./routes/createOrUpdateUser.js')
 const addcart=require('./routes/addcart.js')
 const login=require('./routes/login.js')
+const purchaseFromUser=require('./routes/purchaseFromUser.js')
 const port = 8000
 
 app.use(express.json())
@@ -26,4 +27,5 @@ app.use('/products',products)
 app.use('/createuser',createorupdateuser)
 app.use('/addcart',addcart)
 app.use('/login',login)
+app.use('/buy',purchaseFromUser)
 
