@@ -9,15 +9,15 @@ const Navbar = () => {
         setIsOpen(!isOpen);
     };
 
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
-    const handleNavigateLogin=()=>{
+    const handleNavigateLogin = () => {
         console.log('here')
         navigate('/login')
     }
 
     return (
-        <nav className="bg-gradient-to-r from-blue-400 to-pink-400 p-4">
+        <nav className="bg-gradient-to-r from-blue-400 to-pink-400 p-4 fixed w-full z-50">
             <div className="container mx-auto flex items-center justify-between">
                 {/* Logo and Company Name */}
                 <div className="flex items-center text-white">
@@ -27,10 +27,14 @@ const Navbar = () => {
 
                 {/* Navbar Items for Desktop */}
                 <div className="hidden md:flex space-x-6 items-center text-xl">
+
+                    <Link to="/" className="text-white  hover:text-blue-300">Home</Link>
+                    <Link to="/about" className="text-white  hover:text-blue-300 ">About</Link>
+                    <a href="#" className="text-white  hover:text-blue-300 ">Categories</a>
                     
-                    <a href="#" className="text-white hover:underline">Home</a>
-                    <a href="#" className="text-white hover:underline">About</a>
-                    <a href="#" className="text-white hover:underline">Contact Us</a>
+  
+
+                    <a href="#" className="text-white   hover:text-blue-300">Contact Us</a>
                 </div>
 
                 {/* Login Button for Desktop */}
@@ -55,11 +59,11 @@ const Navbar = () => {
             {/* Mobile Menu */}
             {isOpen && (
                 <div className="md:hidden mt-4">
-                    <a href="#" className="block text-white px-4 py-2 hover:bg-blue-600">Home</a>
+                    <Link to="/" className="block text-white px-4 py-2 hover:bg-blue-600">Home</Link>
                     <a href="#" className="block text-white px-4 py-2 hover:bg-blue-600">About</a>
                     <a href="#" className="block text-white px-4 py-2 hover:bg-blue-600">Contact Us</a>
                     <button className="w-full text-white bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded mt-2"
-                     onClick={handleNavigateLogin}>
+                        onClick={handleNavigateLogin}>
                         Login
                     </button>
                 </div>

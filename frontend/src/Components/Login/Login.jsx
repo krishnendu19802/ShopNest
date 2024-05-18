@@ -84,7 +84,7 @@ export default function Login() {
                                 value={details['email']}
                                 onChange={handleChange}
                                 placeholder='Email'
-                                className="w-3/4 px-3 py-2 rounded bg-gradient-to-r from-pink-600  to-purple-600 text-white  border-blue-100 focus:outline-none focus:border-blue-400"
+                                className="w-3/4 px-3 py-2 rounded bg-gradient-to-r from-pink-600  to-purple-600 text-white  border-blue-100 focus:outline-none focus:border-blue-400 "
                                 required
                             />
                         </div>

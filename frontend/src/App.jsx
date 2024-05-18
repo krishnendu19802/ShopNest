@@ -7,6 +7,7 @@ import Register from './Components/Register/Register'
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom'
 import Navbar from './Components/Navbar/Navbar'
 import HomePage from './Components/HomePage/HomePage'
+import About from './Components/About/About'
 
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
         <Route exact path='/login' element={<Login/>}></Route>
         <Route exact path='/register' element={<Register/>}></Route>
         <Route exact path='/' element={<HomePage/>}></Route>
+        <Route exact path='/about' element={<About/>}></Route>
+
 
       </Routes>
       </BrowserRouter>
