@@ -10,9 +10,9 @@ router.post('/', async (req, res) => {
     try {
         const hpassword=await bcrypt.hash(password,10);
         const resp = await User.create({ email, name, password:hpassword })
-        res.status(200).send(resp)
+        res.status(200).send({email:resp.email, id:resp.id, message: 'Registration successful'})
     } catch (error) {
-        res.status(400).send(`Error: ${error}`)
+        res.status(400).send({message:`Error: ${error}`})
     }
 })
 

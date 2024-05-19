@@ -3,19 +3,19 @@ const router = express.Router()
 const mongoose = require('mongoose')
 
 
-router.get('/', async (req, res) => {
-
+router.post('/', async (req, res) => {
+    const {category}=req.body
     const collectionName = 'products';
 
     const db = mongoose.connection.db;
     const collection = db.collection(collectionName);
 
-    const result = await collection.find({});
+    const result = await collection.find({category});
     const products = await result.toArray();
     res.status(200).send(products)
 })
 
-router.post('/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const collectionName = 'products';
 
     const db = mongoose.connection.db;

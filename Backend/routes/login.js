@@ -9,16 +9,17 @@ router.post('/',async (req,res)=>{
     try {
         const user=await User.findOne({email})
         if(!user){
-            res.status(201).send('User not found')
+            res.status(201).send({message:'User not found'})
             return
         }
 
-            
-        if(bcrypt.compare(password,user.password)){
-            res.status(200).send({name:user.name, email:user.email, id: user.id,cartcount:user.cart.length})
+        const result= await bcrypt.compare(password,user.password)
+        // console.log(result)
+        if(result){
+            res.status(200).send({name:user.name, email:user.email, id: user.id,cartcount:user.cart.length, message:'Successfull'})
         }
         else{
-            res.status(400).send('Passwords do not match')
+            res.status(400).send({message:'Passwords do not match'})
         }
     } catch (error) {
         res.status(400).send('Some error occured: ',error)

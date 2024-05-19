@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Bars3Icon, XMarkIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -8,7 +9,9 @@ const Navbar = () => {
     const toggleNavbar = () => {
         setIsOpen(!isOpen);
     };
+    const { logout, isAuthenticated } = useContext(AuthContext)
 
+    console.log(isAuthenticated)
     const navigate = useNavigate()
 
     const handleNavigateLogin = () => {
@@ -40,12 +43,15 @@ const Navbar = () => {
 
                 {/* Login Button for Desktop */}
                 <div className="hidden md:flex items-center">
-                    <Link to='#'>
+                    {isAuthenticated[0] && <Link to='/cart'>
                         <ShoppingCartIcon className="h-6 w-6 text-white mx-2" />
-                    </Link>
-                    <button className="text-white bg-green-500 hover:bg-green-400 px-4 py-2 rounded" onClick={handleNavigateLogin}>
+                    </Link>}
+                    {!isAuthenticated[0] &&<button className="text-white bg-green-500 hover:bg-green-400 px-4 py-2 rounded" onClick={handleNavigateLogin}>
                         Login
-                    </button>
+                    </button>}
+                    {isAuthenticated[0] &&<button className="text-white bg-red-500 hover:bg-green-400 px-4 py-2 rounded" onClick={()=>{logout()}}>
+                        Logout
+                    </button>}
                 </div>
 
                 {/* Hamburger Menu Icon for Mobile */}
@@ -63,13 +69,15 @@ const Navbar = () => {
             {/* Mobile Menu */}
             {isOpen && (
                 <div className="md:hidden mt-4">
-                    <Link to="/" className="block text-white px-4 py-2 hover:bg-blue-600">Home</Link>
-                    <a href="#" className="block text-white px-4 py-2 hover:bg-blue-600">About</a>
-                    <a href="#" className="block text-white px-4 py-2 hover:bg-blue-600">Contact Us</a>
-                    <button className="w-full text-white bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded mt-2"
-                        onClick={handleNavigateLogin}>
+                    <Link to="/" className="text-white  hover:text-blue-300">Home</Link>
+                    <Link to="/about" className="text-white  hover:text-blue-300 ">About</Link>
+                    <Link to="/category" className="text-white  hover:text-blue-300 ">Categories</Link>
+                    {!isAuthenticated[0] &&<button className="text-white bg-green-500 hover:bg-green-400 px-4 py-2 rounded" onClick={handleNavigateLogin}>
                         Login
-                    </button>
+                    </button>}
+                    {isAuthenticated[0] &&<button className="text-white bg-red-500 hover:bg-green-400 px-4 py-2 rounded" onClick={()=>{logout()}}>
+                        Logout
+                    </button>}
                 </div>
             )}
         </nav>

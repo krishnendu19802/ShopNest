@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Notification.css'
 import { CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
-const Notification = ({ message, status,duration = 3000 }) => {
+const Notification = ({ message, status,duration = 1500 }) => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -14,7 +14,7 @@ const Notification = ({ message, status,duration = 3000 }) => {
             return () => clearTimeout(timer);
         }
     }, [message, duration]);
-
+    console.log(isVisible)
     return (
         <>
         {isVisible && status && (
@@ -36,7 +36,7 @@ const Notification = ({ message, status,duration = 3000 }) => {
         )}
 
         {isVisible && !status && (
-            <div className="fixed top-48 w-1/3 z-50 bg-gradient-to-r from-red-400 to-red-200 rounded-md shadow-lg  right-10 p-4  text-white shadow-md">
+            <div className="fixed top-48 w-1/4 z-50 bg-gradient-to-r from-red-400 to-red-200 rounded-md shadow-lg  right-10 p-4  text-white shadow-md">
                 <div className="relative text-white ">
                     <div className="flex items-center pb-4">
                         <ExclamationCircleIcon className="w-6 h-6 text-white" />

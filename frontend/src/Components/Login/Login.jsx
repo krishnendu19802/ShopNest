@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../../Context/AuthProvider';
 
 export default function Login() {
     const [pwd, setPwd] = useState(true)
@@ -10,7 +11,8 @@ export default function Login() {
         'email': '',
         'password': ''
     })
-
+    const { login, isAuthenticated } = useContext(AuthContext)
+    const navigate = useNavigate()
     const handleChange = (e) => {
         // console.log(e.target.name)
         setDetails((dt) => {
@@ -19,6 +21,7 @@ export default function Login() {
     }
 
     const passwordCheckLogic = () => {
+        console.log('here')
         const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@]).+$/;
 
         if (details.password.length < 8 || details.password.length > 16) {
@@ -37,23 +40,39 @@ export default function Login() {
             return true
 
         }
-        setStatus([false,''])
+        setStatus([false, ''])
         return false
     }
-
+    console.log(isAuthenticated)
     const handleSubmit = (e) => {
+        console.log('reached here')
         e.preventDefault()
-        if(passwordCheckLogic){
+        if (passwordCheckLogic()) {
             return
         }
-        axios.post(`http:localhost:8000/login`, {
+        axios.post(`http://localhost:8000/login`, {
             email: details.email,
             password: details.password
         }).then((result) => {
-            console.log(result.data)
-            status([true,'Successfull'])
+            console.log(result.status)
+            if (result.status === 200) {
+                navigate('/')
+                login(result.data)
+                console.log(result)
+            }
+            else {
+                const data = result.data
+                setStatus([true, data.message])
+            }
+
+
         }).catch((error) => {
-            setStatus([true, error.message])
+            console.log(error)
+            if (error.response.data.message)
+                setStatus([true, error.response.data.message])
+            else
+                setStatus([true, error.message])
+
         })
     }
 

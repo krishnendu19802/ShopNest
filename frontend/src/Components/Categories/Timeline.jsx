@@ -6,7 +6,7 @@ export default function Timeline() {
         { name: "women's clothing", img: 'src/assets/cr-1.jpg' },
         { name: "men's clothing", img: 'src/assets/cr-2.jpg' },
         { name: "jewelery", img: 'src/assets/cr-3.jpg' },
-        { name: "Electronics", img: 'src/assets/electronics.jpg' },
+        { name: "electronics", img: 'src/assets/electronics.jpg' },
 
 
     ];

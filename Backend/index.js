@@ -7,8 +7,11 @@ const addcart=require('./routes/addcart.js')
 const login=require('./routes/login.js')
 const purchaseFromUser=require('./routes/purchaseFromUser.js')
 const port = 8000
+const cors = require('cors');
 
+app.use(cors())
 app.use(express.json())
+
 app.use(express.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://127.0.0.1:27017/wowstore')

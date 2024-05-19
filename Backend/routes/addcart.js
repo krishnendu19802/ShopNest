@@ -1,47 +1,53 @@
-const express=require('express')
-const router=express.Router()
-const User=require('../models/usermodel')
+const express = require('express')
+const router = express.Router()
+const User = require('../models/usermodel')
 
-router.post('/getitems',async(req,res)=>{
-    const {id}=req.body
+router.post('/getitems', async (req, res) => {
+    const { id } = req.body
     try {
-        const userdetails=await User.findById(id)
+        const userdetails = await User.findById(id)
         res.status(200).send(userdetails.cart)
     } catch (error) {
         res.status(400).send("Error fetching the cart")
-        
+
     }
 })
 
-router.post('/',async(req,res)=>{
-    const {id,productId,quantity}=req.body
+router.post('/', async (req, res) => {
+    const { id, productId, quantity, image, price,name } = req.body
     try {
-        const user=await User.findById(id)
+        const user = await User.findById(id)
         // res.status(200).send(user)
         let same;
-        let cart=user.cart.filter((ct)=>{
-            if(ct.productId!=productId)
+        let cart = user.cart.filter((ct) => {
+            if (ct.productId != productId)
                 return true
-            else{
-                same=ct
+            else {
+                same = ct
                 return false
             }
         })
         // console.log(same)
-        if(same===undefined)
-        cart.push({
-            productId,
-            quantity
-        })
-        else{
+        if (same === undefined)
             cart.push({
                 productId,
-                'quantity':quantity+same.quantity
+                quantity,
+                image,
+                price,
+                name
+            })
+        else {
+            cart.push({
+                productId,
+                'quantity': quantity + same.quantity,
+                image,
+                price,
+                name
             })
         }
-        const updateduser=await User.findByIdAndUpdate(
+        const updateduser = await User.findByIdAndUpdate(
             id,
-            {$set:{cart}},
+            { $set: { cart } },
             { new: true, runValidators: true }
 
         )
@@ -52,20 +58,20 @@ router.post('/',async(req,res)=>{
 
 })
 
-router.put('/',async(req,res)=>{
-    const {id,productId,quantity}=req.body
+router.put('/', async (req, res) => {
+    const { id, productId, quantity } = req.body
     try {
         const user = await User.findById(id)
-        const cart =user.cart.map((ct)=>{
-            if(ct.productId!==productId)
+        const cart = user.cart.map((ct) => {
+            if (ct.productId !== productId)
                 return ct
-            else{
-                return {productId,quantity}
+            else {
+                return { productId, quantity }
             }
         })
         const upduser = await User.findByIdAndUpdate(
             id,
-            {$set:{cart}},
+            { $set: { cart } },
             { new: true, runValidators: true }
 
         )
@@ -76,17 +82,21 @@ router.put('/',async(req,res)=>{
 
 })
 
-router.delete('/',async(req,res)=>{
-    const {id,productId}=req.body
+router.delete('/:id/:productId', async (req, res) => {
+    // console.log('Came here')
+    
+    const { id, productId } = req.params
+    console.log(id," ",productId)
     try {
         const user = await User.findById(id)
-        const cart =user.cart.filter(ct=>ct.productId!==productId)
+        const cart = user.cart.filter(ct => ct.productId !== parseInt(productId))
         const upduser = await User.findByIdAndUpdate(
             id,
-            {$set:{cart}},
+            { $set: { cart } },
             { new: true, runValidators: true }
 
         )
+        // console.log(cart)
         res.status(200).send(upduser.cart)
     } catch (error) {
         res.status(400).send(`Some error occured: ${error}`)
@@ -94,4 +104,4 @@ router.delete('/',async(req,res)=>{
 
 })
 
-module.exports=router
+module.exports = router

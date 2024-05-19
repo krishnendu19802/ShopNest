@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon, UserIcon } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Register() {
@@ -11,7 +11,7 @@ export default function Register() {
         'password': '',
         'name': ''
     })
-
+const navigate=useNavigate()
     const handleChange = (e) => {
         // console.log(e.target.name)
         setDetails((dt) => {
@@ -46,18 +46,22 @@ export default function Register() {
         e.preventDefault()
         console.log(details)
 
-        if (passwordCheckLogic) {
+        if (passwordCheckLogic()) {
             return
         }
 
-        // axios.post(`http:localhost:8000/login`, {
-        //     email: details.email,
-        //     password: details.password
-        // }).then((result) => {
-        //     console.log(result.data)
-        // }).catch((error) => {
-        //     setStatus([true, error.message])
-        // })
+        axios.post(`http://localhost:8000/createuser`, {
+            email: details.email,
+            password: details.password,
+            name:details.name
+        }).then((result) => {
+            const data=result.data
+            console.log(data)
+            setStatus([true, data.message])
+            navigate('/login')
+        }).catch((error) => {
+            setStatus([true, error.message])
+        })
     }
 
     const togglepwd = () => {
@@ -128,7 +132,7 @@ export default function Register() {
                                 type="submit"
                                 className="w-1/2 bg-gradient-to-r from-purple-600 to-pink-600 hover:bg-blue-500 text-white py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
                             >
-                                Sign In
+                                Register
                             </button>
                         </div>
 
