@@ -1,0 +1,10 @@
+/* Add this to your global CSS file or a CSS module */
+
+@keyframes progress {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0;
+    }
+}

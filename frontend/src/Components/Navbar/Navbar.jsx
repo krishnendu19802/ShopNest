@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
@@ -30,15 +30,19 @@ const Navbar = () => {
 
                     <Link to="/" className="text-white  hover:text-blue-300">Home</Link>
                     <Link to="/about" className="text-white  hover:text-blue-300 ">About</Link>
-                    <a href="#" className="text-white  hover:text-blue-300 ">Categories</a>
-                    
-  
-
+                    <Link to="/category" className="text-white  hover:text-blue-300 ">Categories</Link>
                     <a href="#" className="text-white   hover:text-blue-300">Contact Us</a>
+
+
+
+
                 </div>
 
                 {/* Login Button for Desktop */}
-                <div className="hidden md:flex">
+                <div className="hidden md:flex items-center">
+                    <Link to='#'>
+                        <ShoppingCartIcon className="h-6 w-6 text-white mx-2" />
+                    </Link>
                     <button className="text-white bg-green-500 hover:bg-green-400 px-4 py-2 rounded" onClick={handleNavigateLogin}>
                         Login
                     </button>

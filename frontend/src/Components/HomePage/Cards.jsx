@@ -9,6 +9,8 @@ const Cards = () => {
         { name: 'Electronics', image: 'src/assets/electronics.jpg' },
     ];
 
+    
+
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
     const nextCard = () => {
@@ -45,7 +47,7 @@ const Cards = () => {
             {/* Cards for mobile view */}
             <div className="flex md:hidden space-between md:space-x-4 overflow-hidden items-center justify-between">
 
-                <button onClick={prevCard} className="bg-blue-500 text-white px-4 py-2 rounded rounded-full h-12 w-12 flex items-center justify-center">
+                <button onClick={prevCard} className="bg-transparent text-white px-4 py-2 rounded rounded-full h-12 w-12 flex items-center justify-center">
                     <ChevronLeftIcon className="w-6 h-6" />
                 </button>
                 {cards.map((card, index) => (
@@ -58,7 +60,7 @@ const Cards = () => {
                         </div>
                     </div>
                 ))}
-                <button onClick={nextCard} className="bg-blue-500 text-white px-4 py-2 rounded rounded-full h-12 w-12 flex items-center justify-center">
+                <button onClick={nextCard} className="bg-transparent text-white px-4 py-2 rounded rounded-full h-12 w-12 flex items-center justify-center">
                     <ChevronRightIcon className="w-6 h-6" />
                 </button>
 

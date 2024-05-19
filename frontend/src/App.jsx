@@ -8,6 +8,9 @@ import { BrowserRouter, Route, Router, Routes } from 'react-router-dom'
 import Navbar from './Components/Navbar/Navbar'
 import HomePage from './Components/HomePage/HomePage'
 import About from './Components/About/About'
+import Category from './Components/Categories/Category'
+import EachCategory from './Components/Categories/EachCategory'
+import IndividualProduct from './Components/Product/IndividualProduct'
 
 
 function App() {
@@ -22,6 +25,13 @@ function App() {
         <Route exact path='/register' element={<Register/>}></Route>
         <Route exact path='/' element={<HomePage/>}></Route>
         <Route exact path='/about' element={<About/>}></Route>
+        <Route exact path='/category' element={<Category/>}></Route>
+        <Route exact path='/category/:categoryname' element={<EachCategory/>}></Route>
+        <Route exact path='/product/:id' element={<IndividualProduct/>}></Route>
+
+
+
+        
 
 
       </Routes>
