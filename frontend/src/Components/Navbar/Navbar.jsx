@@ -23,10 +23,13 @@ const Navbar = () => {
         <nav className="bg-gradient-to-r from-blue-400 to-pink-400 p-4 fixed w-full z-50">
             <div className="container mx-auto flex items-center justify-between">
                 {/* Logo and Company Name */}
-                <div className="flex items-center text-white">
-                    <img src="/path/to/logo.png" alt="Company Logo" className="h-8 w-8 mr-2" />
-                    <span className="text-lg font-semibold">Company Name</span>
-                </div>
+                <Link to={`/`}>
+                    <div className="flex items-center text-white">
+
+                        <img src="src/assets/logo.png" alt="Company Logo" className="h-12 w-12 mr-2 rounded-full" />
+                        <span className="text-lg font-semibold">ShopNest</span>
+                    </div>
+                </Link>
 
                 {/* Navbar Items for Desktop */}
                 <div className="hidden md:flex space-x-6 items-center text-xl">
@@ -34,7 +37,7 @@ const Navbar = () => {
                     <Link to="/" className="text-white  hover:text-blue-300">Home</Link>
                     <Link to="/about" className="text-white  hover:text-blue-300 ">About</Link>
                     <Link to="/category" className="text-white  hover:text-blue-300 ">Categories</Link>
-                    <a href="#" className="text-white   hover:text-blue-300">Contact Us</a>
+                    <Link to="/contactus" className="text-white   hover:text-blue-300">Contact Us</Link>
 
 
 
@@ -46,10 +49,10 @@ const Navbar = () => {
                     {isAuthenticated[0] && <Link to='/cart'>
                         <ShoppingCartIcon className="h-6 w-6 text-white mx-2" />
                     </Link>}
-                    {!isAuthenticated[0] &&<button className="text-white bg-green-500 hover:bg-green-400 px-4 py-2 rounded" onClick={handleNavigateLogin}>
+                    {!isAuthenticated[0] && <button className="text-white bg-green-500 hover:bg-green-400 px-4 py-2 rounded" onClick={handleNavigateLogin}>
                         Login
                     </button>}
-                    {isAuthenticated[0] &&<button className="text-white bg-red-500 hover:bg-green-400 px-4 py-2 rounded" onClick={()=>{logout()}}>
+                    {isAuthenticated[0] && <button className="text-white bg-red-500 hover:bg-green-400 px-4 py-2 rounded" onClick={() => { logout() }}>
                         Logout
                     </button>}
                 </div>
@@ -68,14 +71,34 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="md:hidden mt-4">
-                    <Link to="/" className="text-white  hover:text-blue-300">Home</Link>
-                    <Link to="/about" className="text-white  hover:text-blue-300 ">About</Link>
-                    <Link to="/category" className="text-white  hover:text-blue-300 ">Categories</Link>
-                    {!isAuthenticated[0] &&<button className="text-white bg-green-500 hover:bg-green-400 px-4 py-2 rounded" onClick={handleNavigateLogin}>
+                <div className="  md:hidden mt-4">
+                    <Link to="/" className="text-white  hover:text-blue-300">
+                        <div className='p-2'> Home</div>
+                    </Link>
+                    <hr />
+
+                    <Link to="/about" className="text-white  hover:text-blue-300  ">
+                        <div className='p-2'>About</div>
+                    </Link>
+                    <hr />
+                    <Link to="/category" className="text-white  hover:text-blue-300 ">
+                        <div className='p-2'>Categories</div>
+                    </Link>
+                    <hr />
+
+                    {!isAuthenticated[0] && <button className="text-white bg-green-500 hover:bg-green-400 m-2 px-4 py-2 rounded" onClick={handleNavigateLogin}>
                         Login
                     </button>}
-                    {isAuthenticated[0] &&<button className="text-white bg-red-500 hover:bg-green-400 px-4 py-2 rounded" onClick={()=>{logout()}}>
+
+                    {isAuthenticated[0] && <Link to='/cart'>
+                        <div className='p-2'>
+
+                            <ShoppingCartIcon className="h-6 w-6 text-white mx-2" />
+                        </div>
+                    </Link>}
+                    {isAuthenticated[0] && <hr />}
+
+                    {isAuthenticated[0] && <button className="text-white bg-red-500 hover:bg-green-400 px-4 py-2 rounded" onClick={() => { logout() }}>
                         Logout
                     </button>}
                 </div>

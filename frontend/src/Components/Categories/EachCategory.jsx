@@ -4,6 +4,7 @@ import { StarIcon as StarOutline } from '@heroicons/react/24/outline';
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import Footer from '../Footer/Footer';
 export default function EachCategory() {
     // const products = [
     //     {
@@ -83,7 +84,7 @@ export default function EachCategory() {
         <div>
             <Navbar />
             <div className="h-16"></div>
-            <div className="grid grid-cols-1  gap-8 p-4 bg-gradient-to-b from-blue-200 via-pink-300 to-gray-900 w-full ">
+            <div className="min-h-screen grid grid-cols-1  gap-8 p-4 bg-gradient-to-b from-blue-200 via-pink-300 to-gray-900 w-full ">
                 {products.map((pr, index) => (
                     <Link to={`/product/${pr.id}`}>
                         <div className="w-full md:w-3/4 mx-auto bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row transition-transform transform duration-500 hover:scale-105">
@@ -105,6 +106,7 @@ export default function EachCategory() {
                     </Link>
                 ))}
             </div>
+            <Footer/>
 
         </div>
     )

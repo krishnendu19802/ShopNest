@@ -4,6 +4,7 @@ import Navbar from '../Navbar/Navbar'
 import Carousel from './Carousel'
 import Cards from './Cards'
 import LongPage from './LongPage'
+import Footer from '../Footer/Footer'
 
 export default function HomePage() {
   return (
@@ -13,6 +14,7 @@ export default function HomePage() {
       <LongPage/>
       <hr className='bg-white ' />
       <Cards/>
+      <Footer/>
     </div>
   )
 }

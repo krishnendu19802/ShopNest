@@ -17,7 +17,7 @@ export default function Timeline() {
 
             {/* for big screens */}
 
-            <div className="hidden md:block container-about w-full bg-gradient-to-b from-blue-200 via-pink-300 to-gray-900 ">
+            <div className=" hidden md:block container-about w-full bg-gradient-to-b from-blue-200 via-pink-300 to-gray-900 ">
                 <div className="relative wrap overflow-hidden p-10 h-full">
                     <div className="border-2-2 absolute border-opacity-20 border-gray-700 h-full border" style={{ left: '50%' }}></div>
                     {categories.map((cat, index) => (
@@ -39,7 +39,7 @@ export default function Timeline() {
             </div>
 
             {/* for small screens */}
-            <div className=" flex md:hidden flex-col justify-center bg-gradient-to-b from-blue-200 via-pink-300 to-gray-900 w-full">
+            <div className="pt-8 flex md:hidden flex-col justify-center bg-gradient-to-b from-blue-200 via-pink-300 to-gray-900 w-full">
                 {categories.map((cat, index) => (
                     <div key={index} className=" mb-4 ">
                         <Link to={`/category/${cat.name}`}>
