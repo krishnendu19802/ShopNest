@@ -38,6 +38,8 @@ export default function Timeline() {
                 </div>
             </div>
 
+            
+
             {/* for small screens */}
             <div className="pt-8 flex md:hidden flex-col justify-center bg-gradient-to-b from-blue-200 via-pink-300 to-gray-900 w-full">
                 {categories.map((cat, index) => (
