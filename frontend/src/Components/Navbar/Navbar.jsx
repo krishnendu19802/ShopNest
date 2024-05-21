@@ -19,6 +19,11 @@ const Navbar = () => {
         navigate('/login')
     }
 
+    const handleLogout=()=>{
+        
+        logout()
+    }
+
     return (
         <nav className="bg-gradient-to-r from-blue-400 to-pink-400 p-4 fixed w-full z-50">
             <div className="container mx-auto flex items-center justify-between">
@@ -98,7 +103,7 @@ const Navbar = () => {
                     </Link>}
                     {isAuthenticated[0] && <hr />}
 
-                    {isAuthenticated[0] && <button className="text-white bg-red-500 hover:bg-green-400 px-4 py-2 rounded" onClick={() => { logout() }}>
+                    {isAuthenticated[0] && <button className="text-white bg-red-500 hover:bg-green-400 px-4 py-2 rounded" onClick={handleLogout}>
                         Logout
                     </button>}
                 </div>

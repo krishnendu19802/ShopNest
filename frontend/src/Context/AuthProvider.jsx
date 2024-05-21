@@ -11,6 +11,8 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    localStorage.removeItem('shopnest_token')
+    // console.log(localStorage.getItem('shopnest_token'))
     setIsAuthenticated([false]);
   };
 

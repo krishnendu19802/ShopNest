@@ -124,7 +124,7 @@ export default function IndividualProduct() {
                             <button className="text-md mx-3 p-3 bg-yellow-500 hover:bg-yellow-200 rounded-md" onClick={()=>{handleAddtoCart()}}>Add to cart</button>
                             <button className="text-md mx-3 p-3 bg-green-500 hover:bg-green-200 rounded-md" onClick={updateModal}>Buy</button>
                         </div>
-                        <Modal modalStatus={modalStatus} updateModal={updateModal} product={product} />
+                        <Modal modalStatus={modalStatus} updateModal={updateModal} product={{...product,productId:product.id}} />
 
                     </div>
                 </div>

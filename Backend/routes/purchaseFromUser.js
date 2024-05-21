@@ -9,7 +9,7 @@ const sendMail = require('../Helper/Nodemailer')
 
 
 router.post('/', async (req, res) => {
-    const { id, productId, productName, quantity } = req.body
+    const { id, productId, title, quantity } = req.body
     try {
         const collectionName = 'products';
 
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
         const purchaseit = await Purchase.create({
             productId,
             quantity,
-            productName,
+            title,
             'totalPrice': quantity * product[0].price,
             'customerId': id
         })
@@ -50,13 +50,13 @@ router.post('/', async (req, res) => {
         )
         sendMail({ name: user.name, email: user.email }, 1, {
             quantity,
-            name:productName,
+            name:title,
             'price': quantity * product[0].price,
         })
 
 
 
-        res.status(200).send(updatedUser)
+        res.status(200).send('Order has been confirmed!')
         // res.send(user)
 
 
