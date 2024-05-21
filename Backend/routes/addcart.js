@@ -14,7 +14,7 @@ router.post('/getitems', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const { id, productId, quantity, image, price,name } = req.body
+    const { id, productId, quantity, image, price,title } = req.body
     try {
         const user = await User.findById(id)
         // res.status(200).send(user)
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
                 quantity,
                 image,
                 price,
-                name
+                title
             })
         else {
             cart.push({
@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
                 'quantity': quantity + same.quantity,
                 image,
                 price,
-                name
+                title
             })
         }
         const updateduser = await User.findByIdAndUpdate(

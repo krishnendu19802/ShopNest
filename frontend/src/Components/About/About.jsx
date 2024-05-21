@@ -47,7 +47,7 @@ export default function About() {
                                     <footer className="mt-2 text-gray-600">- Jane Doe</footer>
                                 </blockquote>
                                 <blockquote className="bg-gray-100 bg-opacity-80 p-4 rounded-lg shadow">
-                                    <p className="text-gray-700 leading-relaxed">"Shopping at [YourCompany] has been a wonderful experience. The website is easy to navigate, and the shipping is fast. Highly recommend to others."</p>
+                                    <p className="text-gray-700 leading-relaxed">"Shopping at ShopNest has been a wonderful experience. The website is easy to navigate, and the shipping is fast. Highly recommend to others."</p>
                                     <footer className="mt-2 text-gray-600">- John Smith</footer>
                                 </blockquote>
                             </div>
@@ -66,7 +66,7 @@ export default function About() {
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
 
         </>
 

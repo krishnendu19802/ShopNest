@@ -61,7 +61,7 @@ export default function IndividualProduct() {
             quantity:1,
             image:product.image,
             price:product.price,
-            name:product.name
+            title:product.title
         }).then((result)=>{
             showNotification(true,'Added to cart')
         }).catch((error)=>{

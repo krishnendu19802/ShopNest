@@ -14,26 +14,26 @@ const AuthProvider = ({ children }) => {
     setIsAuthenticated([false]);
   };
 
-//   const fetchdatalogin = async () => {
-//     const token = localStorage.getItem('whosmydoc')
-//     // console.log(token)
-//     if (token) {
-//       const headers = {
-//         "Authorization": `Bearer ${token}`
-//       };
-//       await axios.post(`http://localhost:3000/login`, {}, { headers }).then((result) => {
-//         console.log(result.data)
-//         const { status, user } = result.data
-//         setIsAuthenticated([true, user])
-//       }).catch((error) => {
-//         console.log(error)
-//       })
+  const fetchdatalogin = async () => {
+    const token = localStorage.getItem('shopnest_token')
+    // console.log(token)
+    if (token) {
+      const headers = {
+        "Authorization": `Bearer ${token}`
+      };
+      await axios.post(`http://localhost:8000/login`, {}, { headers }).then((result) => {
+        // console.log(result.data)
+        
+        setIsAuthenticated([true, result.data])
+      }).catch((error) => {
+        console.log(error)
+      })
 
-//     }
-//   }
-//   useEffect(() => {
-//     fetchdatalogin()
-//   }, [])
+    }
+  }
+  useEffect(() => {
+    fetchdatalogin()
+  }, [])
   return (
     <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, login, logout }}>
       {children}

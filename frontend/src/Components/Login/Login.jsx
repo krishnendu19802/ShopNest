@@ -56,6 +56,7 @@ export default function Login() {
         }).then((result) => {
             console.log(result.status)
             if (result.status === 200) {
+                localStorage.setItem('shopnest_token',result.data.token)
                 navigate('/')
                 login(result.data)
                 console.log(result)

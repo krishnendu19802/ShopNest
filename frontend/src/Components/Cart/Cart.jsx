@@ -43,6 +43,7 @@ export default function Cart() {
             console.log('Not logged in')
             return
         }
+        console.log(isAuthenticated[1])
         axios.post('http://localhost:8000/addcart/getitems', {
             id: isAuthenticated[1].id
         }).then((result) => {

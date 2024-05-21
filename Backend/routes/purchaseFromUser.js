@@ -3,8 +3,13 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Purchase = require('../models/purchase')
 const User = require('../models/usermodel')
+const sendMail = require('../Helper/Nodemailer')
+
+
+
+
 router.post('/', async (req, res) => {
-    const { id, productId, quantity } = req.body
+    const { id, productId, productName, quantity } = req.body
     try {
         const collectionName = 'products';
 
@@ -23,6 +28,7 @@ router.post('/', async (req, res) => {
         const purchaseit = await Purchase.create({
             productId,
             quantity,
+            productName,
             'totalPrice': quantity * product[0].price,
             'customerId': id
         })
@@ -36,12 +42,20 @@ router.post('/', async (req, res) => {
             date: purchaseit.date
         })
 
-        let updatedUser=await User.findByIdAndUpdate(
+        let updatedUser = await User.findByIdAndUpdate(
             id,
-            {$set:{previousOrders}},
+            { $set: { previousOrders } },
             { new: true, runValidators: true }
 
         )
+        sendMail({ name: user.name, email: user.email }, 1, {
+            quantity,
+            name:productName,
+            'price': quantity * product[0].price,
+        })
+
+
+
         res.status(200).send(updatedUser)
         // res.send(user)
 

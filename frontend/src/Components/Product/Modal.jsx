@@ -27,7 +27,7 @@ const Modal = ({ modalStatus, updateModal, product }) => {
 
                     <div className="quantity_and_price">
                         <p className="mb-4 flex items-center">Quantity:
-                            <input type="number" value={quantity} onChange={updatequantity} className='shadow-inner bg-gray-100 rounded mx-2 p-2 w-1/2' />
+                            <input type="number" min={1} value={quantity} onChange={updatequantity} className='shadow-inner bg-gray-100 rounded mx-2 p-2 w-1/2' />
                         </p>
 
                         <p className="mb-4 flex items-center">Price:
