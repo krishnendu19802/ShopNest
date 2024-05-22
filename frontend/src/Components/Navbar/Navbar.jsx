@@ -19,8 +19,8 @@ const Navbar = () => {
         navigate('/login')
     }
 
-    const handleLogout=()=>{
-        
+    const handleLogout = () => {
+
         logout()
     }
 
@@ -44,7 +44,7 @@ const Navbar = () => {
                     <Link to="/category" className="text-white  hover:text-blue-300 ">Categories</Link>
                     <Link to="/contactus" className="text-white   hover:text-blue-300">Contact Us</Link>
                     {isAuthenticated[0] && <Link to="/previousorders" className="text-white   hover:text-blue-300">Orders</Link>
-}
+                    }
 
 
 
@@ -92,15 +92,27 @@ const Navbar = () => {
                         <div className='p-2'>Categories</div>
                     </Link>
                     <hr />
+                    <Link to="/contactus" className="text-white   hover:text-blue-300">
+                        <div className='p-2'>Contact Us</div>
+                    </Link>
+                    <hr />
+                    {isAuthenticated[0] && 
+                    <>
+                    <Link to="/previousorders" className="text-white   hover:text-blue-300">
+                        <div className='p-2'>Orders</div>
+                        
+                    </Link>
+                    <hr />
+                    </>}
 
                     {!isAuthenticated[0] && <button className="text-white bg-green-500 hover:bg-green-400 m-2 px-4 py-2 rounded" onClick={handleNavigateLogin}>
                         Login
                     </button>}
 
                     {isAuthenticated[0] && <Link to='/cart'>
-                        <div className='p-2'>
+                        <div className='p-2 text-white'>
 
-                            <ShoppingCartIcon className="h-6 w-6 text-white mx-2" />
+                            Cart
                         </div>
                     </Link>}
                     {isAuthenticated[0] && <hr />}

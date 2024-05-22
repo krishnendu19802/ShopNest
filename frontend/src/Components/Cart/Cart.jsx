@@ -51,7 +51,7 @@ export default function Cart() {
             id: isAuthenticated[1].id
         }).then((result) => {
             console.log(result.data)
-            setProducts(result.data)
+            setProducts(result.data.reverse())
         }).catch((error) => {
             console.log(error.message)
         })

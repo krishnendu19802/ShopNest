@@ -33,7 +33,7 @@ export default function ContactUs() {
     return (
         <div>
             <Navbar />
-            {/* <div className="h-16"></div> */}
+            <div className="h-16"></div>
             <div className="flex justify-center items-center min-h-screen bg-gray-100 pt-20 md:pt-8 bg-gradient-to-b from-blue-200 via-pink-300 to-gray-900 w-full ">
                 {!sentstatus[0] && <form className="bg-white p-8 rounded-lg shadow-lg w-4/5 md:w-full max-w-2xl bg-gradient-to-b to-green-400 from-blue-400 mb-8 md:mb-0" onSubmit={handleSubmit}>
                     <h2 className="text-2xl font-bold mb-6 text-center text-white">Contact Us</h2>

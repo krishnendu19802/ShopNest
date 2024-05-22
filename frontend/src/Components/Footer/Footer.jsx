@@ -1,5 +1,6 @@
 import React from 'react';
 import { PhoneIcon,  EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -37,10 +38,10 @@ const Footer = () => {
                     <div>
                         <h2 className="text-2xl font-semibold mb-4">Quick Links</h2>
                         <ul className="space-y-2 text-gray-400">
-                            <li><a href="/about" className="hover:underline">About Us</a></li>
-                            <li><a href="/shop" className="hover:underline">Shop</a></li>
-                            <li><a href="/faq" className="hover:underline">FAQ</a></li>
-                            <li><a href="/contact" className="hover:underline">Contact Us</a></li>
+                            <li><Link to="/about" className="hover:underline">About Us</Link></li>
+                            <li><Link to="/" className="hover:underline">Shop</Link></li>
+                            <li><Link to="/about" className="hover:underline">FAQ</Link></li>
+                            <li><Link to="/contactus" className="hover:underline">Contact Us</Link></li>
                         </ul>
                     </div>
 
