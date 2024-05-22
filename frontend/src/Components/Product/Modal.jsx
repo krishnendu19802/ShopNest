@@ -34,7 +34,7 @@ const Modal = ({ modalStatus, updateModal, product }) => {
             setStatus([false, 'Enter your location'])
             return
         }
-        axios.post('http://localhost:8000/buy', {
+        axios.post('https://shopnest-156j.onrender.com/buy', {
             id: isAuthenticated[1].id,
             productId: product.productId,
             title: product.title,

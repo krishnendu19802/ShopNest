@@ -22,7 +22,7 @@ export default function ContactUs() {
 
     const handleSubmit=(e)=>{
         e.preventDefault()
-        axios.post('http://localhost:8000/contactus',details).then((result)=>{
+        axios.post('https://shopnest-156j.onrender.com/contactus',details).then((result)=>{
             console.log(result.data)
             setSentStatus([true,result.data])
         }).catch((error)=>{

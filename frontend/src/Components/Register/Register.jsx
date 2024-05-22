@@ -50,7 +50,7 @@ const navigate=useNavigate()
             return
         }
 
-        axios.post(`http://localhost:8000/createuser`, {
+        axios.post(`https://shopnest-156j.onrender.com/createuser`, {
             email: details.email,
             password: details.password,
             name:details.name

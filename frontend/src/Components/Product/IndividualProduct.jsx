@@ -38,7 +38,7 @@ export default function IndividualProduct() {
     }
 
     const getproduct=()=>{
-        axios.get(`http://localhost:8000/products/${id}`,{category:categoryname}).then((result)=>{
+        axios.get(`https://shopnest-156j.onrender.com/products/${id}`,{category:categoryname}).then((result)=>{
             setProduct(result.data)
         }).catch((error)=>{
             console.log(error)
@@ -55,7 +55,7 @@ export default function IndividualProduct() {
             showNotification(false,'You need to login first')
             return
         }
-        axios.post('http://localhost:8000/addcart',{
+        axios.post('https://shopnest-156j.onrender.com/addcart',{
             id:isAuthenticated[1].id,
             productId:product.id,
             quantity:1,

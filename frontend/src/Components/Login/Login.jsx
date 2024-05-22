@@ -50,7 +50,7 @@ export default function Login() {
         if (passwordCheckLogic()) {
             return
         }
-        axios.post(`http://localhost:8000/login`, {
+        axios.post(`https://shopnest-156j.onrender.com/login`, {
             email: details.email,
             password: details.password
         }).then((result) => {

@@ -47,7 +47,7 @@ export default function Cart() {
             return
         }
         console.log(isAuthenticated[1])
-        axios.post('http://localhost:8000/addcart/getitems', {
+        axios.post('https://shopnest-156j.onrender.com/addcart/getitems', {
             id: isAuthenticated[1].id
         }).then((result) => {
             console.log(result.data)
@@ -59,7 +59,7 @@ export default function Cart() {
     }
 
     const handleRemove=(val)=>{
-        axios.delete(`http://localhost:8000/addcart/${isAuthenticated[1].id}/${val}`).then((result) => {
+        axios.delete(`https://shopnest-156j.onrender.com/addcart/${isAuthenticated[1].id}/${val}`).then((result) => {
             console.log(result.data)
             setProducts(result.data)
             // showNotification(true,"Removed from Cart")

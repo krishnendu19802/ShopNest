@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
       const headers = {
         "Authorization": `Bearer ${token}`
       };
-      await axios.post(`http://localhost:8000/login`, {}, { headers }).then((result) => {
+      await axios.post(`https://shopnest-156j.onrender.com/login`, {}, { headers }).then((result) => {
         // console.log(result.data)
         
         setIsAuthenticated([true, result.data])

@@ -67,7 +67,7 @@ export default function EachCategory() {
     console.log(categoryname)
     
     const getproducts=()=>{
-        axios.post('http://localhost:8000/products',{category:categoryname}).then((result)=>{
+        axios.post('https://shopnest-156j.onrender.com/products',{category:categoryname}).then((result)=>{
             setProducts(result.data)
         }).catch((error)=>{
             console.log(error)

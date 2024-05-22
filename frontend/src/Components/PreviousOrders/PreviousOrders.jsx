@@ -15,7 +15,7 @@ export default function PreviousOrders() {
         if(!isAuthenticated[0])
             navigate('/login')
 
-        axios.post('http://localhost:8000/buy/getitems', { id: isAuthenticated[1].id }).then((result) => {
+        axios.post('https://shopnest-156j.onrender.com/buy/getitems', { id: isAuthenticated[1].id }).then((result) => {
             setProducts(result.data.reverse())
         }).catch((error) => {
             console.log(error.response.data.message)
