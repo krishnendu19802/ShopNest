@@ -5,7 +5,7 @@ const User = require('../models/usermodel')
 const bcrypt = require('bcrypt')
 router.post('/', async (req, res) => {
     // console.log('Reached here')
-    console.log(req.body)
+    // console.log(req.body)
     const { email, name, password } = req.body
     try {
         const hpassword=await bcrypt.hash(password,10);

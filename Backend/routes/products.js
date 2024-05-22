@@ -6,12 +6,14 @@ const mongoose = require('mongoose')
 router.post('/', async (req, res) => {
     const {category}=req.body
     const collectionName = 'products';
-
+    // console.log(category)
     const db = mongoose.connection.db;
     const collection = db.collection(collectionName);
 
+    // console.log(collection)
     const result = await collection.find({category});
     const products = await result.toArray();
+    
     res.status(200).send(products)
 })
 

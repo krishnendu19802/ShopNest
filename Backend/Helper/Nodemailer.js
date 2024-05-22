@@ -5,12 +5,12 @@ if (!process.env.EMAIL || !process.env.PASSWORD) {
     console.error('Missing EMAIL or PWD environment variables.');
     
 }
-else{
-    console.log({
-        email: process.env.EMAIL,
-        password: process.env.PASSWORD
-    })
-}
+// else{
+//     console.log({
+//         email: process.env.EMAIL,
+//         password: process.env.PASSWORD
+//     })
+// }
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,

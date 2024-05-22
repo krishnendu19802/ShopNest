@@ -49,7 +49,7 @@ export default function PreviousOrders() {
                                 <h1 className=' text-lg text-center md:text-left'>Price per item: Rs. {(parseInt(pr.totalPrice)/pr.quantity).toFixed(2)}</h1>
                                 <h1 className=' text-lg text-center md:text-left'>Delivery Charge: Rs. {pr.deliveryCharge}</h1>
 
-                                <p className='flex font-bold justify-center md:justify-start'>Total Price Rs. {Math.floor(pr.totalPrice) * pr.quantity}</p>
+                                <p className='flex font-bold justify-center md:justify-start'>Total Price Rs. {Math.floor(pr.totalPrice) }</p>
                             </div>
 
                             
