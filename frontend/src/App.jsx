@@ -13,6 +13,7 @@ import EachCategory from './Components/Categories/EachCategory'
 import IndividualProduct from './Components/Product/IndividualProduct'
 import Cart from './Components/Cart/Cart'
 import ContactUs from './Components/ContactUs/ContactUs'
+import PreviousOrders from './Components/PreviousOrders/PreviousOrders'
 
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
         <Route exact path='/product/:id' element={<IndividualProduct/>}></Route>
         <Route exact path='/cart' element={<Cart/>}></Route>
         <Route exact path='/contactus' element={<ContactUs/>}></Route>
+        <Route exact path='/previousorders' element={<PreviousOrders/>}></Route>
+
 
 
       </Routes>

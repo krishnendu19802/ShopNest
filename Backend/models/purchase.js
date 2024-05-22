@@ -21,6 +21,10 @@ const purchaseSchema = new mongoose.Schema({
     customerId: {
         type: String,
         required: true
+    },
+    deliveryCharge: {
+        type: Number,
+        required: true
     }
 });
 

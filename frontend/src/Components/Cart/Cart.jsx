@@ -38,9 +38,12 @@ export default function Cart() {
     // ]
     const { isAuthenticated } = useContext(AuthContext)
     const [products, setProducts] = useState([])
+    const navigate=useNavigate()
     const getProducts = () => {
         if (!isAuthenticated[0]) {
             console.log('Not logged in')
+            navigate('/login')
+
             return
         }
         console.log(isAuthenticated[1])

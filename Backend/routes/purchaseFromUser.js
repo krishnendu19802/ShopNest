@@ -9,7 +9,7 @@ const sendMail = require('../Helper/Nodemailer')
 
 
 router.post('/', async (req, res) => {
-    const { id, productId, title, quantity } = req.body
+    const { id, productId, title, quantity,deliveryCharge } = req.body
     try {
         const collectionName = 'products';
 
@@ -29,7 +29,8 @@ router.post('/', async (req, res) => {
             productId,
             quantity,
             title,
-            'totalPrice': quantity * product[0].price,
+            deliveryCharge,
+            'totalPrice': Number(quantity * product[0].price)+Number(deliveryCharge),
             'customerId': id
         })
         const user = await User.findById(id)
@@ -38,6 +39,8 @@ router.post('/', async (req, res) => {
             purchaseId: purchaseit.id,
             productId,
             quantity,
+            title,
+            deliveryCharge,
             totalPrice: purchaseit.totalPrice,
             date: purchaseit.date
         })
@@ -51,7 +54,7 @@ router.post('/', async (req, res) => {
         sendMail({ name: user.name, email: user.email }, 1, {
             quantity,
             name:title,
-            'price': quantity * product[0].price,
+            'price': Number(quantity * product[0].price)+Number(deliveryCharge),
         })
 
 
@@ -61,9 +64,25 @@ router.post('/', async (req, res) => {
 
 
     } catch (error) {
+        console.log(error)
         res.send(error)
     }
 
+})
+
+router.post('/getitems',async(req,res)=>{
+    const {id}=req.body
+    try {
+        const user=await User.findById(id)
+        if(!user){
+            res.status(400).send('User not found')
+            return
+        }
+        res.status(200).send(user.previousOrders)
+
+    } catch (error) {
+        res.status(400).send(`Error: ${error}`)
+    }
 })
 
 module.exports = router

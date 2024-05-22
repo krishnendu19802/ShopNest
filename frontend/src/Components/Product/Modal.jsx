@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
-
+import calculateLocation from './location';
 const Modal = ({ modalStatus, updateModal, product }) => {
     const [isModalOpen, setIsModalOpen] = useState(modalStatus);
     const [quantity, setQuantity] = useState(1)
-    const [status,setStatus]=useState([false,''])
-    const {isAuthenticated}=useContext(AuthContext)
+    const [deliveryCharge, setDeliveryCharge] = useState(-1)
+
+    const [status, setStatus] = useState([false, ''])
+    const { isAuthenticated } = useContext(AuthContext)
     const updatequantity = (e) => {
         setQuantity(e.target.value)
     }
@@ -19,29 +21,44 @@ const Modal = ({ modalStatus, updateModal, product }) => {
         setIsModalOpen(false);
     };
 
-    const handleBuy=(e)=>{
+    const handleBuy = (e) => {
         e.preventDefault()
-        if(quantity<1){
+        if (quantity < 1) {
             setQuantity(1)
-            setStatus([false,'Quantity should be more than 0'])
+            setStatus([false, 'Quantity should be more than 0'])
             return
         }
-        axios.post('http://localhost:8000/buy',{
-            id:isAuthenticated[1].id,
-            productId:product.productId,
-            title:product.title,
-            quantity
-        }).then((result)=>{
-            setStatus([true,result.data])
+
+        if (deliveryCharge < 0) {
+            
+            setStatus([false, 'Enter your location'])
+            return
+        }
+        axios.post('http://localhost:8000/buy', {
+            id: isAuthenticated[1].id,
+            productId: product.productId,
+            title: product.title,
+            quantity,
+            deliveryCharge
+        }).then((result) => {
+            setStatus([true, result.data])
+            console.log(result)
             setTimeout(() => {
-                setStatus([false,''])
+                setStatus([false, ''])
                 closeModal()
 
             }, 3000);
-        }).catch((error)=>{
-            setStatus([false,error.response.data])
+        }).catch((error) => {
+            setStatus([false, 'Some error occured'])
         })
     }
+
+    const handleLocation=async()=>{
+        const dist=await calculateLocation()
+        console.log(dist)
+        setDeliveryCharge((dist*0.02).toFixed(2))
+    }
+
 
     return (
         modalStatus && (
@@ -62,7 +79,19 @@ const Modal = ({ modalStatus, updateModal, product }) => {
                         </p>
 
                     </div>
-                    <div className={`p-2 text-center font-bold text-${!status[0]?'red-400':'green-400'}`}>
+                    <div className="location_access">
+                    <button
+                            onClick={handleLocation}
+                            className="px-4 py-2 bg-red-500 text-white rounded-lg my-2 md:my-0"
+                        >
+                            Enter location
+                        </button>
+                    </div>
+                    <div className="distanceprice"> 
+                    Delivery charge:
+                        <p className="shadow-inner bg-gray-100 rounded sm:mx-2 p-2">{deliveryCharge}</p>
+                    </div>
+                    <div className={`p-2 text-center font-bold text-${!status[0] ? 'red-400' : 'green-400'}`}>
                         {status[1]}
                     </div>
                     <hr />

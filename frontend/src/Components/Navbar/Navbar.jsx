@@ -43,6 +43,8 @@ const Navbar = () => {
                     <Link to="/about" className="text-white  hover:text-blue-300 ">About</Link>
                     <Link to="/category" className="text-white  hover:text-blue-300 ">Categories</Link>
                     <Link to="/contactus" className="text-white   hover:text-blue-300">Contact Us</Link>
+                    {isAuthenticated[0] && <Link to="/previousorders" className="text-white   hover:text-blue-300">Orders</Link>
+}
 
 
 
