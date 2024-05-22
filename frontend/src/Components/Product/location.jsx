@@ -1,7 +1,8 @@
 import { getDistance } from 'geolib';
 
 const calculateLocation = () => {
-    const org = { latitude: 23.5208704, longitude: 87.343104 };
+    // console.log(process.env.REACT_APP_API_LATITUDE)
+    const org = { latitude: import.meta.env.VITE_LATITUDE, longitude: import.meta.env.VITE_LONGITUDE };
 
     return new Promise((resolve, reject) => {
         if (navigator.geolocation) {

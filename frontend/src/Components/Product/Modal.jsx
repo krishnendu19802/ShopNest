@@ -30,7 +30,7 @@ const Modal = ({ modalStatus, updateModal, product }) => {
         }
 
         if (deliveryCharge < 0) {
-            
+
             setStatus([false, 'Enter your location'])
             return
         }
@@ -53,10 +53,12 @@ const Modal = ({ modalStatus, updateModal, product }) => {
         })
     }
 
-    const handleLocation=async()=>{
-        const dist=await calculateLocation()
+    const handleLocation = async () => {
+        // console.log(import.meta.env.VITE_LATITUDE)
+
+        const dist = await calculateLocation()
         console.log(dist)
-        setDeliveryCharge((dist*0.02).toFixed(2))
+        setDeliveryCharge((dist * 0.02).toFixed(2))
     }
 
 
@@ -80,15 +82,15 @@ const Modal = ({ modalStatus, updateModal, product }) => {
 
                     </div>
                     <div className="location_access">
-                    <button
+                        <button
                             onClick={handleLocation}
                             className="px-4 py-2 bg-red-500 text-white rounded-lg my-2 md:my-0"
                         >
                             Enter location
                         </button>
                     </div>
-                    <div className="distanceprice"> 
-                    Delivery charge:
+                    <div className="distanceprice">
+                        Delivery charge:
                         <p className="shadow-inner bg-gray-100 rounded sm:mx-2 p-2">{deliveryCharge}</p>
                     </div>
                     <div className={`p-2 text-center font-bold text-${!status[0] ? 'red-400' : 'green-400'}`}>
