@@ -3,10 +3,13 @@ import { AuthContext } from '../../Context/AuthProvider'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Navbar from '../Navbar/Navbar'
+import Loader from '../Loader/Loader'
 
 export default function PreviousOrders() {
     const { isAuthenticated } = useContext(AuthContext)
     const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(false)
+
     const navigate = useNavigate()
     console.log(products)
     // console.log(isAuthenticated[1])
@@ -16,14 +19,18 @@ export default function PreviousOrders() {
             navigate('/login')
 
         axios.post('https://shopnest-156j.onrender.com/buy/getitems', { id: isAuthenticated[1].id }).then((result) => {
+            setLoading(false)
+
             setProducts(result.data.reverse())
         }).catch((error) => {
+            setLoading(false)
+
             console.log(error.response.data.message)
         })
     }
 
     useEffect(() => {
-        
+        setLoading(true)
         getitems()
     }, [isAuthenticated])
 
@@ -35,7 +42,9 @@ export default function PreviousOrders() {
             <div className="h-16"></div>
             
             <div className="min-h-screen    p-4 bg-gradient-to-b from-blue-200 via-pink-300 to-gray-900 w-full ">
-
+            {loading && <div className="flex items-center justify-center h-4/5 mt-16">
+                <Loader size={96} /></div>}
+                
                 {products.map((pr, index) => (
 
                     <div className=" h-2/3 w-full md:w-3/4 mx-auto bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row transition-transform transform duration-500 hover:scale-105 mb-8" >

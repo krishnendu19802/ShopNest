@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon, UserIcon } from '@heroicons/react/24/solid';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Loader from '../Loader/Loader';
 
 export default function Register() {
     const [pwd, setPwd] = useState(true)
@@ -11,7 +12,9 @@ export default function Register() {
         'password': '',
         'name': ''
     })
-const navigate=useNavigate()
+    const [loading, setLoading] = useState(false)
+
+    const navigate = useNavigate()
     const handleChange = (e) => {
         // console.log(e.target.name)
         setDetails((dt) => {
@@ -38,28 +41,36 @@ const navigate=useNavigate()
             return true
 
         }
-        setStatus([false,''])
+        setStatus([false, ''])
         return false
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setLoading(true)
+
         console.log(details)
 
         if (passwordCheckLogic()) {
+            setLoading(false)
+
             return
         }
 
         axios.post(`https://shopnest-156j.onrender.com/createuser`, {
             email: details.email,
             password: details.password,
-            name:details.name
+            name: details.name
         }).then((result) => {
-            const data=result.data
+            setLoading(false)
+
+            const data = result.data
             console.log(data)
             setStatus([true, data.message])
             navigate('/login')
         }).catch((error) => {
+            setLoading(false)
+
             setStatus([true, error.message])
         })
     }
@@ -130,8 +141,10 @@ const navigate=useNavigate()
                         <div className="flex justify-center pe-8">
                             <button
                                 type="submit"
-                                className="w-1/2 bg-gradient-to-r from-purple-600 to-pink-600 hover:bg-blue-500 text-white py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+                                className="w-1/2 bg-gradient-to-r from-purple-600 to-pink-600 hover:bg-blue-500 text-white py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 flex items-center justify-center "
                             >
+                                 {loading && <Loader size={24} />}
+                                 
                                 Register
                             </button>
                         </div>

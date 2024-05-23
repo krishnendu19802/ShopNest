@@ -5,6 +5,7 @@ import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../Footer/Footer';
+import Loader from '../Loader/Loader';
 export default function EachCategory() {
     // const products = [
     //     {
@@ -46,8 +47,10 @@ export default function EachCategory() {
     //     }
     // ]
 
-    
-    const [products,setProducts]= useState([])
+
+    const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(true)
+
     const stars = (rating) => {
         const flooredRating = Math.floor(rating);
         const totalStars = 5;
@@ -65,19 +68,23 @@ export default function EachCategory() {
     }
     let { categoryname } = useParams()
     console.log(categoryname)
-    
-    const getproducts=()=>{
-        axios.post('https://shopnest-156j.onrender.com/products',{category:categoryname}).then((result)=>{
+
+    const getproducts = () => {
+        axios.post('https://shopnest-156j.onrender.com/products', { category: categoryname }).then((result) => {
+            setLoading(false)
             setProducts(result.data)
-        }).catch((error)=>{
+        }).catch((error) => {
+            setLoading(false)
+
             console.log(error)
         })
     }
-    
 
-    useEffect(()=>{
+
+    useEffect(() => {
+        setLoading(true)
         getproducts()
-    },[])
+    }, [])
 
     // console.log(categoryname)
     return (
@@ -85,6 +92,9 @@ export default function EachCategory() {
             <Navbar />
             <div className="h-16"></div>
             <div className="min-h-screen grid grid-cols-1  gap-8 p-4 bg-gradient-to-b from-blue-200 via-pink-300 to-gray-900 w-full ">
+                {loading && <div className="flex items-center justify-center h-4/5 mt-16">
+                    <Loader size={96} /></div>}
+                    
                 {products.map((pr, index) => (
                     <Link to={`/product/${pr.id}`}>
                         <div className="w-full md:w-3/4 mx-auto bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row transition-transform transform duration-500 hover:scale-105">
@@ -106,7 +116,7 @@ export default function EachCategory() {
                     </Link>
                 ))}
             </div>
-            <Footer/>
+            <Footer />
 
         </div>
     )

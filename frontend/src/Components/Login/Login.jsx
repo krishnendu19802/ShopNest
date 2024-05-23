@@ -3,10 +3,13 @@ import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon } from '@heroicons/
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../Context/AuthProvider';
+import Loader from '../Loader/Loader';
 
 export default function Login() {
     const [pwd, setPwd] = useState(true)
     const [status, setStatus] = useState([false, ''])
+    const [loading, setLoading] = useState(false)
+
     const [details, setDetails] = useState({
         'email': '',
         'password': ''
@@ -26,11 +29,11 @@ export default function Login() {
 
         if (details.password.length < 8 || details.password.length > 16) {
             if (details.password.length < 8) {
-                setStatus([true, 'Password too short'])
+                setStatus([true, 'Password should be between 8-16 characters'])
                 return true
             }
             else {
-                setStatus([true, 'Password too long'])
+                setStatus([true, 'Password should be between 8-16 characters'])
                 return true
 
             }
@@ -45,9 +48,11 @@ export default function Login() {
     }
     console.log(isAuthenticated)
     const handleSubmit = (e) => {
-        console.log('reached here')
         e.preventDefault()
+        console.log('reached here')
+        setLoading(true)
         if (passwordCheckLogic()) {
+            setLoading(false)
             return
         }
         axios.post(`https://shopnest-156j.onrender.com/login`, {
@@ -56,6 +61,7 @@ export default function Login() {
         }).then((result) => {
             console.log(result.status)
             if (result.status === 200) {
+                setLoading(false)
                 localStorage.setItem('shopnest_token',result.data.token)
                 navigate('/')
                 login(result.data)
@@ -69,6 +75,8 @@ export default function Login() {
 
         }).catch((error) => {
             console.log(error)
+            setLoading(false)
+
             if (error.response.data.message)
                 setStatus([true, error.response.data.message])
             else
@@ -134,8 +142,10 @@ export default function Login() {
                         <div className="flex justify-center pe-8">
                             <button
                                 type="submit"
-                                className="w-1/2 bg-gradient-to-r from-purple-600 to-pink-600 hover:bg-blue-500 text-white py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+                                className={`w-1/2 bg-gradient-to-r from-purple-600 to-pink-600 hover:bg-blue-500 text-white py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 flex items-center justify-center `}
                             >
+                                {loading && <Loader size={24} />}
+                                
                                 Sign In
                             </button>
                         </div>

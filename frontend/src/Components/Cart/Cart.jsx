@@ -5,6 +5,7 @@ import Notification from '../Product/Notification';
 import Modal from '../Product/Modal';
 import axios from 'axios';
 import { AuthContext } from '../../Context/AuthProvider';
+import Loader from '../Loader/Loader';
 
 export default function Cart() {
     // const products = [
@@ -38,7 +39,8 @@ export default function Cart() {
     // ]
     const { isAuthenticated } = useContext(AuthContext)
     const [products, setProducts] = useState([])
-    const navigate=useNavigate()
+    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
     const getProducts = () => {
         if (!isAuthenticated[0]) {
             console.log('Not logged in')
@@ -52,13 +54,16 @@ export default function Cart() {
         }).then((result) => {
             console.log(result.data)
             setProducts(result.data.reverse())
+            setLoading(false)
         }).catch((error) => {
+            setLoading(false)
+
             console.log(error.message)
         })
 
     }
 
-    const handleRemove=(val)=>{
+    const handleRemove = (val) => {
         axios.delete(`https://shopnest-156j.onrender.com/addcart/${isAuthenticated[1].id}/${val}`).then((result) => {
             console.log(result.data)
             setProducts(result.data)
@@ -69,6 +74,7 @@ export default function Cart() {
     }
 
     useEffect(() => {
+        setLoading(true)
         getProducts()
     }, [])
 
@@ -83,7 +89,7 @@ export default function Cart() {
     }
 
 
-    const showNotification = (st,mes) => {
+    const showNotification = (st, mes) => {
         setMessage({ status: st, mess: mes });
 
         setTimeout(() => {
@@ -97,11 +103,15 @@ export default function Cart() {
 
             <Navbar />
             <div className="h-16"></div>
+            {/* {loading && <div className="flex items-center justify-center h-full">
+                <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-blue-500"></div>
+            </div>} */}
             <Notification message={message.mess} duration={1500} status={message.status} />
 
             <Modal modalStatus={modalStatus} updateModal={updateModal} product={target} />
             <div className="min-h-screen    p-4 bg-gradient-to-b from-blue-200 via-pink-300 to-gray-900 w-full ">
-
+                {loading && <div className="flex items-center justify-center h-4/5 mt-16">
+                <Loader size={96} /></div>}
                 {products.map((pr, index) => (
 
                     <div className=" h-2/3 w-full md:w-3/4 mx-auto bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row transition-transform transform duration-500 hover:scale-105 mb-8" >
@@ -120,7 +130,7 @@ export default function Cart() {
                             </div>
 
                             <div className="mb-4 flex justify-center">
-                                <button className="text-md mx-3 text-white p-3 bg-red-500 hover:bg-red-200 rounded-md" onClick={() => { handleRemove(pr.productId)}}>Remove from cart</button>
+                                <button className="text-md mx-3 text-white p-3 bg-red-500 hover:bg-red-200 rounded-md" onClick={() => { handleRemove(pr.productId) }}>Remove from cart</button>
                                 <button className="text-md mx-3 p-3 text-white bg-green-500 hover:bg-green-200 rounded-md" onClick={() => { updateModal(pr) }}>Buy</button>
                             </div>
 
